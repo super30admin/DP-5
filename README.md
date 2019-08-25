@@ -36,8 +36,6 @@ The robot can only move either down or right at any point in time. The robot is 
 How many possible unique paths are there?
 
 
-Above is a 7 x 3 grid. How many possible unique paths are there?
-
 Note: m and n will be at most 100.
 
 Example 1:
