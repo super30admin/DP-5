@@ -11,12 +11,14 @@ You may assume the dictionary does not contain duplicate words.
 Example 1:
 
 Input: s = "leetcode", wordDict = ["leet", "code"]
+
 Output: true
              Explanation: Return true because "leetcode" can be segmented as "leet code".
              
 Example 2:
 
 Input: s = "applepenapple", wordDict = ["apple", "pen"]
+
 Output: true
              Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
 
@@ -24,6 +26,7 @@ Output: true
 Example 3:
 
 Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+
 Output: false 
 
 ## Problem2: (https://leetcode.com/problems/unique-paths/)
@@ -38,7 +41,9 @@ Note: m and n will be at most 100.
 Example 1:
 
 Input: m = 3, n = 2
+
 Output: 3
+
 Explanation:
 
 From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
@@ -52,4 +57,5 @@ From the top-left corner, there are a total of 3 ways to reach the bottom-right 
 Example 2:
 
 Input: m = 7, n = 3
+
 Output: 28
