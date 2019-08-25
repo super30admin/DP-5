@@ -13,6 +13,7 @@ Example 1:
 Input: s = "leetcode", wordDict = ["leet", "code"]
 
 Output: true
+
              Explanation: Return true because "leetcode" can be segmented as "leet code".
              
 Example 2:
@@ -20,6 +21,7 @@ Example 2:
 Input: s = "applepenapple", wordDict = ["apple", "pen"]
 
 Output: true
+
              Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
 
              Note that you are allowed to reuse a dictionary word.
@@ -44,9 +46,7 @@ Input: m = 3, n = 2
 
 Output: 3
 
-Explanation:
-
-From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+Explanation:From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
 
 1. Right -> Right -> Down
 
