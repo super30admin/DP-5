@@ -28,6 +28,20 @@ public class wordBreak {
         }
         return dp[s.length()];
     }
+    
+    //recursive solution
+    public boolean wordBreak(String s, List<String> wordDict) {
+        HashSet<String> set = new HashSet<>(wordDict);
+        return helper(s,set);
+    }
+    public boolean helper(String s,HashSet<String> set){
+        if(s.length() == 0) return true;
+        for(int i = 1;i<=s.length();i++){
+            if(set.contains(s.substring(0,i)) && helper(s.substring(i,s.length()),set))
+                return true;
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         String s = "aaaaaaa";
