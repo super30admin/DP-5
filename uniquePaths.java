@@ -1,5 +1,5 @@
-//Time Complexity: O(mn)
-//Space Complexity: O(mn)
+//Time Complexity: O(N^2)
+//Space Complexity: O(N^2)
 //Accepted on leetcode
 //The aim is to find the number of unique paths from start to end given that the romot can only move right and down
 //We can break this by finding the number of paths to reach the first box and based on the answer calculated for that box we calculate the number of paths for the next box and so on...
