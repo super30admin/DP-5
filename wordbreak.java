@@ -1,4 +1,4 @@
-//Time complexity: O(N)
+//Time complexity: O(N^2)
 //Space complexity: O(N)
 //Accepted on leetcode.
 //So the aim is to identify if the given string can be broken into valid words (or words present in the given dictionary).
