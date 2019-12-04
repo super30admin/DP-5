@@ -29,7 +29,7 @@ class Solution(object):
 
 
 
-#recursive - got error  - time complexity - o(n^n)
+#recursive  - time complexity - o(n^n)
 
 class Solution(object):
     def wordBreak(self, s, wordDict):
@@ -45,16 +45,12 @@ class Solution(object):
     
     def helper(self,s,wordset):
         
-        n= len(s)
-        if n==len(s):
+        if not s:
             return True
-        for i in range(0,n):
+        n=len(s)
+        for i in range(0,n+1):
             if s[0:i] in wordset:
                 if self.helper(s[i:],wordset):
                       return True
         return False
     
-    
-  
-            
-                
