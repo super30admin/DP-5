@@ -1,4 +1,4 @@
-# Time Complexity : O((m*n)^2)
+# Time Complexity : O(2^(m*n))
 # Space Complexity : O(m*n)
 # Did this code successfully run on Leetcode : No
 # Any problem you faced while coding this : Thinking about the logic and optimal solution
