@@ -1,5 +1,5 @@
 //Brute Force
-//TC - O(2*(m^2 + n^2))
+//TC - O(2^(m^2 + n^2))
 //SC - O(1)
 //TLE on Leetcode
 
