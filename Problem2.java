@@ -1,5 +1,38 @@
+//Brute Force
+//TC - O(2*(m^2 + n^2))
+//SC - O(1)
+//TLE on Leetcode
+
+class Solution {
+    int paths = 0;
+    public int uniquePaths(int m, int n) {
+        findpaths(m, n, 0, 0);
+        return paths;
+    }
+    
+    private void findpaths(int m, int n, int x, int y)
+    {
+        //base
+        if(x == m || y == n) return;
+        
+        if(x == m -1 && y == n - 1)
+        {
+            ++paths;
+            return;
+        }
+        
+        //logic
+        findpaths(m, n, x + 1, y);
+        findpaths(m, n , x, y + 1);
+    }
+}
+
+
+
+//DP Solution
 //TC - O(mn)
 //SC - O(mn)
+//Ran Successfully on leetcode
 
 class Solution {
     public int uniquePaths(int m, int n) {
