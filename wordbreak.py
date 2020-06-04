@@ -39,10 +39,10 @@ class Solution:
         return False
     
     
-    # def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    #     word_dict = set(wordDict)
-    #     dp = {}
-    #     return self.splitstring(s,word_dict,dp)
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        word_dict = set(wordDict)
+        dp = {}
+        return self.splitstring(s,word_dict,dp)
     
     
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
