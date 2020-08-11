@@ -1,4 +1,4 @@
-// Time Complexity : O(n^2) --> where n is the length of input string
+// Time Complexity : O(n^3) --> where n is the length of input string
 // Space Complexity : O(n) 
 // Did this code successfully run on Leetcode (139): Yes
 // Any problem you faced while coding this : No
