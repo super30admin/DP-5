@@ -40,6 +40,8 @@ class Unique_Paths_Brute_Force_Brute {
 //Did this code successfully run on Leetcode : yes
 //Any problem you faced while coding this : none
 
+/**We store the the paths till m-1, n-1 block.
+ * proceed to the target block, based on the paths till the previous blocks*/
 
 class Solution {
 	public int uniquePaths(int m, int n) {
