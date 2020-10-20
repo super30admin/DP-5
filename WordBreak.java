@@ -47,4 +47,36 @@ public class WordBreak {
         dp.put(s, false);
         return false;
     }
+
+    /*
+    TC: O(n^2 * n) - for 2 loops aand generating substring
+    SC: O(n) - for dp array and hashset
+    */
+    public boolean wordBreakDP(String s, List<String> wordDict) {
+        HashSet<String> set = new HashSet<>();
+        if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
+            return false;
+        } 
+        
+        for (String word: wordDict) {
+            set.add(word);
+        }
+        
+        boolean[] dp = new boolean[s.length() + 1];
+        
+        // empty string can be constructed using words in dict
+        dp[0] = true;
+        
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] == true && set.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    // important to break here, as we have a valid break at this point
+                    break;
+                }
+            }
+        }
+        
+        return dp[dp.length - 1];
+    }
 }
