@@ -1,0 +1,13 @@
+//Time Complexity : O(N*N)
+//  Space complexity : O(N)
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean dp[] = new boolean[s.length()];
+        for(int i = 0; i < s.length(); i++){
+              for(int K = 1; K <= s.length() && i-K+1 >= 0; K++){
+                dp[i] = (dp[i] || (i-K >= 0 ? dp[i-K] : true) && wordDict.contains(s.substring(i-K+1, i+1)));
+            }
+        }
+         return dp[s.length()-1];
+    }
+}
