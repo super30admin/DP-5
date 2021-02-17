@@ -1,0 +1,37 @@
+class Solution:
+    def fun(self, rowidx, colidx, dp, m, n):
+        # valid path, once robot reaches the destination, 
+        if(rowidx == m-1 and colidx == n-1):
+            return 1;
+        
+        # if number of the ways from postion to destination are already calculated
+        if(dp[rowidx][colidx] != -1):
+            return dp[rowidx][colidx];
+        
+        # initialize the countways variable for every function call
+        countways = 0;
+        
+        # check robot possibility of moves to the right and left directions 
+        for dx, dy in [[1,0], [0,1]]:
+            # check for the boundaries
+            if(0 <= rowidx + dx < m and 0 <= colidx + dy < n):
+                countways += self.fun(rowidx + dx, colidx + dy, dp, m, n);
+        
+        dp[rowidx][colidx] = countways;
+        return countways
+                    
+                
+    
+    def uniquePaths(self, m: int, n: int) -> int:
+        # initialize the dp array
+        dp = [[-1]*n for i in range(m)];
+        
+        return self.fun(0, 0, dp, m, n);
+    
+    '''
+    time complexity = O(mn)
+    space complexity = O(mn)
+    '''
+        
+        
+        
