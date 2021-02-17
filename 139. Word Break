@@ -1,0 +1,42 @@
+class Solution(object):
+    
+    def fun(self, startidx, s, hashset, dp):
+        # if the entire string is processed
+        if(startidx == len(s)):
+            return True;
+        
+        # if given substring is already processed
+        if(startidx in dp):
+            return dp[startidx];
+        
+        result = False;
+        # check for all the partitions 
+        for endidx in range(startidx + 1, len(s) + 1):
+            
+            pathresult = s[startidx:endidx] in hashset and self.fun(endidx, s, hashset, dp);            
+            # if any of the partition is a valid partitions, break from the for loop
+            if( pathresult):
+                result = True;
+                break;
+        
+        dp[startidx] = result;
+        return dp[startidx];
+            
+        
+   
+    
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+        # add all the words of wordDict into a set
+        hashset = set(wordDict)
+        #initialize a dp dictionary with key as start index and value as boolean
+        dp={}
+        return self.fun(0, s,hashset,dp)
+    '''
+    time complexity = O(n3)
+    space compelxity = O(n)
+    '''
