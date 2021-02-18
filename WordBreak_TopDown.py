@@ -4,7 +4,12 @@ class Solution:
     With Cache:
     Time Complexity:
     Space Complexity: O(n)
+    
+    Without Cache:
+    Time Complexity: O(n^n)
+    Space Complexity: O(n)
     '''
+    
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         x = set(wordDict)
         o = False
