@@ -19,3 +19,28 @@ class Solution:
 
         # logic
         return self.helper(m, n, i + 1, j) + self.helper(m, n, i, j + 1)
+
+# Optimized Solution: Using DP Matrix:
+class Solution:
+    
+    """
+    Description: find number of unique paths
+    
+    Time Complexity: O(mn)
+    Space Complexity: O(mn)
+    
+    Approach: Use DP matrix
+    - start matrix with 1s
+    - add above and left element to find next value in dp matrix
+    - last value results in total number of paths
+    """
+    
+    def uniquePaths(self, m: int, n: int) -> int:
+        
+        dp = [[1 for __ in range(n)] for __ in range(m)]
+        
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i][j - 1] + dp[i - 1][j]
+        
+        return dp[m - 1][n - 1]
