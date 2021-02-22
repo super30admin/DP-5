@@ -1,0 +1,65 @@
+//recursion
+//TC - o(n^n)
+//SC - o(m+h) m is no of words in wordDict and h is height of the tree
+class Solution {
+    HashSet<String> set;
+    public boolean wordBreak(String s, List<String> wordDict) {
+        
+        if(s == null || s.length() == 0)
+            return false;
+        
+        set = new HashSet<>(wordDict);
+        return helper(s);
+    }
+    
+    private boolean helper(String s) {
+        
+        if(s.length() == 0)
+            return true;
+        
+        for(int i =0; i<s.length();i++){
+            if(set.contains(s.substring(0,i+1)) && helper(s.substring(i+1))) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+//TC - o(n^3) bcs we have two nested loops (n^2) and substring computation o(n)
+//SC - o(m+n) m is no of words in the list
+class Solution {
+    HashSet<String> set;
+    public boolean wordBreak(String s, List<String> wordDict) {
+        
+        if(s == null || s.length() == 0)
+            return false;
+        boolean [] dp = new boolean [s.length()+1];
+        dp[0] = true;
+        
+        //add all the words in set - o(1)
+        set = new HashSet<>(wordDict);
+        
+        for(int i =1;i<s.length()+1;i++) {
+            //once you come out of the while loop set j to zero
+            int j =0;
+            //traverse till j is less thn i
+            while(j<i){
+                //check if the string before j is in the wordDict 
+                if(dp[j]) {
+                    //if yes then check the rest of the substring is present or not
+                    //if present return true and break
+                    if(set.contains(s.substring(j,i))) {
+                        dp[i] = true;
+                        //means before and between words are the in the dictionary 
+                        //we no need to check further
+                        break;
+                    }
+                }
+                j++;
+            }
+        }
+        
+        return dp[s.length()];
+    }
+}

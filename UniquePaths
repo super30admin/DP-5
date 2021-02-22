@@ -1,0 +1,73 @@
+//T - o(2^(m+n))
+//S - o(h) height of the tree
+class Solution {
+    public int uniquePaths(int m, int n) {
+        //dfs with starting point 0,0
+        return helper(m,n,0,0); 
+    }
+    
+    private int helper(int m,int n,int i,int j){
+        //base
+        //if we reaach the destination 
+        //return 1
+        if(i == m-1 && j == n-1)
+            return 1;
+        //if i or j is outof bound return 0
+        if(i == m || j == n)
+            return 0;
+        //logic
+        return helper(m,n,i+1,j) + helper(m,n,i,j+1);
+        
+    }
+}
+
+//TC - o(mn)
+//SC-o(mn)
+class Solution {
+    public int uniquePaths(int m, int n) {
+        
+        int [][] dp = new int [m+1][n+1];
+        //exit as one
+        dp[m-1][n-1] = 1;
+        
+        //start from the end pf the dp array and fill
+        for(int i=m-1; i>=0;i--){
+            for(int j = n-1;j>=0;j--){
+                //as we have mark exit as 1 just continue
+                if(i == m-1 && j == n-1)
+                    continue;
+                //no of ways from index i and j
+                dp[i][j] = dp[i+1][j]+dp[i][j+1];
+            }
+        }
+        
+        //return start point of the robot
+        return dp[0][0];
+    }
+}
+
+//TC - o(mn)
+//SC-o(n)
+class Solution {
+    public int uniquePaths(int m, int n) {
+        
+        int[] dp = new int [n];
+        //fill last row with 1
+        //as there is only one possibility 
+        Arrays.fill(dp,1);
+        
+        //start from the m-2 of the dp array and fill
+        //bcs we already filled last row
+        for(int i=m-2; i>=0;i--){
+            int prev = 0;
+            for(int j = n-1;j>=0;j--){
+                //no of ways from index i and j
+                dp[j] = dp[j]+prev;
+                prev = dp[j];
+            }
+        }
+        
+        //return start point of the robot
+        return dp[0];
+    }
+}
