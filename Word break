@@ -1,0 +1,24 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+       if (s == null || s.length() == 0) {
+            return true;
+        }
+        // Set<String> set = new HashSet<>(wordDict);
+        int n = s.length();
+        boolean[] dp = new boolean[n + 1];
+        dp[0] = true;
+        for (int j = 1; j <= s.length(); j++) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i <= j; i++) {
+                sb.insert(0, s.charAt(j - i));
+                if (dp[j - i] && wordDict.contains(sb.toString())) {
+                    dp[j] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n]; 
+    }
+}
+//Time complexity: O(n^2)
+//Space complexity:O(n)
