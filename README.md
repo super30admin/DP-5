@@ -1,7 +1,53 @@
 # DP-5
 
 ## Problem1: (https://leetcode.com/problems/word-break/)
+//Time Complexity = O(m*n)
+//Space Complexity = O(m*n)
+//DP Solution
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if(s == null || s.length() == 0)return false; 
+        
+        HashSet<String> set = new HashSet<>(wordDict);
+        int n = s.length(); 
+        boolean[] dp = new boolean[n+1]; 
+        dp[0] = true; 
+        
+        for(int i = 1; i < dp.length; i++){
+            for(int j = 0; j < i; j++){
+                if(dp[j] && set.contains(s.substring(j,i))){
+                    dp[i] = true;
+                    break; 
+                }
+            }
+        }
+        return dp[dp.length - 1];
+    }
+}
 
+//Time Complexity = n^n
+//Space Complexity = O(n)
+//Recursive Solution
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if(s == null || s.length() == 0)return false; 
+        
+        HashSet<String> set = new HashSet<>(wordDict); 
+        return helper(s, set); 
+    }
+    
+    private boolean helper(String s, HashSet<String> set){
+        //base
+        if(s.length() == 0) return true; 
+        //logic
+        for(int i = 1; i <= s.length(); i++){
+            if(set.contains(s.substring(0,i)) && helper(s.substring(i),set)){
+                return true;
+            }
+        }
+        return false;
+    }
+}
 
 ## Problem2: (https://leetcode.com/problems/unique-paths/)
 //Time Complexity = O(m*n)
