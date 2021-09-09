@@ -1,44 +1,61 @@
-"""
-TC: O(mn)
-SC: O(mn)
-"""
 class Solution:
-    # for recursive soltuion....
-    '''
-    def helper(self, i, j):
-        #if i == 0 and j == 0:
-        #   return 0
-        if i == 0 or j == 0:
-            return  1
-        return self.helper(i-1,j) + self.helper(i,j-1)
-    '''
+    # Approach 1: DFS
+    """
+    TC: O(2^(m*n))
+    Exceeds time limit
+    """
     def uniquePaths(self, m: int, n: int) -> int:
-        # iterative solution....
-        #mat = [[0 for x in range(n)] for y in range(m)]
-        '''
-        for i in range(n):
-            mat[0][i] = 1
-        for j in range(m):
-            mat[j][0] = 1
+        self.count = 0
+        self.dfs(0,0,m,n)
+        return self.count
+    
+    def dfs(self, r,c, m, n ):
+        #base
+        if not 0<= r < m or not 0<= c < n:
+            return
+        if r == m-1 and c == n-1:
+            self.count += 1
         
-        for i in range(1,m):
-            for j in range(1,n):
-                mat[i][j] = mat[i-1][j] + mat[i][j-1]
-        print (mat)
-        return mat[m-1][n-1]
+        #logic
+        self.dfs(r + 1, c, m, n)
+        self.dfs(r, c+1, m, n)
+    
+    # Approach 2: DP
+    """
+    TC: O(m*n)
+    SC: O(m*n)
+    """
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [[0]*n for _ in range(m)]
+        for r in range(m-1, -1, -1):
+            dp[r][n-1] = 1
         
-        return self.helper(m-1,n-1)
+        for c in range(n-1, -1, -1):
+            dp[m-1][c] = 1
         
-        # space optimized solution
-        mat = [1 for _ in range(n)]
-        for i in range(m-1):
-            for j in range(1,n):
-                mat[j] += mat[j-1]
-        return mat[n-1]
-        '''
-        #combinatorics
+        for r in range(m-2, -1, -1):
+            for c in range(n-2, -1, -1):
+                dp[r][c] = dp[r][c+1] + dp[r+1][c]
+        
+        return dp[0][0]
+    
+    # Approach 3: Space optimized DP
+    """
+    TC: O(m*n)
+    SC: O(n)
+    """
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [1]*n
+        
+        for r in range(m-2, -1, -1):
+            for c in range(n-2, -1, -1):
+                dp[c] += dp[c+1]
+        
+        return dp[0]
+    
+    # Approach 4: #combinatorics
+    from math import factorial
+    def uniquePaths(self, m: int, n: int) -> int:
         fn = m+n-2
         fk = n-1
-        from math import factorial
         return int(factorial(fn)/(factorial(fk)*(factorial(fn-fk))))
-        
