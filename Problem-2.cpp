@@ -52,3 +52,29 @@ public:
         return dp[0][0];
     }
 };
+
+
+/*
+Time Complexity = O(m*n)
+Space Complexity = O(n)
+where m is the number of rows and n is the number of coloumns.
+*/
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<int> dp(n, 1);
+        int right;
+        int i,j;
+        
+        for(i=m-2;i>=0;i--)
+        {
+            right = 0;
+            for(j=n-1;j>=0;j--)
+            {
+                dp[j] = dp[j] + right;
+                right = dp[j];
+            }
+        }
+        return dp[0];
+    }
+};
