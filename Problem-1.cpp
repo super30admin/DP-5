@@ -30,3 +30,39 @@ public:
         return helper(s,st);
     }
 };
+
+/*
+TC = O(n^4)
+SC = O(l)
+Where l is the length of the string.
+Time limit exceeded
+*/
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        if(s.length()!=0 && wordDict.size()==0)
+            return false;
+        set<string> st;
+        int i,j;
+        for(i=0;i<wordDict.size();i++)
+            st.insert(wordDict[i]);
+        int n=s.length();
+        vector<bool> dp(n+1,false);
+        dp[0]=true;
+        for(i=1;i<n+1;i++)
+        {
+            for(j=0;j<i;j++)
+            {
+                if(dp[j])
+                {
+                    if(st.find(s.substr(j,i-j))!=st.end())
+                    {
+                        dp[i]=true;
+                        break;
+                    }
+                }
+            }
+        }
+        return dp[n];
+    }
+};
