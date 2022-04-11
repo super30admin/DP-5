@@ -1,0 +1,31 @@
+class Solution {
+    
+    int[][] dp;
+    
+    public int uniquePaths(int m, int n) {
+        
+        dp = new int[m][n];
+        return uniquePaths(0, 0, m, n);
+        
+    }
+    
+    private int uniquePaths(int i, int j, int m, int n){
+        //base
+        if(i == m-1 && j == n-1){
+            return 1;
+        }
+        
+        if(i == m || j == n){
+            return 0;
+        }
+        
+        if(dp[i][j] == 0){
+            
+            dp[i][j] = uniquePaths(i, j+1, m, n) + uniquePaths(i+1, j, m, n);
+        
+        }
+
+         return dp[i][j];
+        
+    }
+}
