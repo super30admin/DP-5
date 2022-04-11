@@ -1,0 +1,57 @@
+class Solution {
+    
+    //Integer is for index and boolean is to see whether it can get partitioned or not
+   
+    private int[] dp;
+    
+    public boolean wordBreak(String s, List<String> wordDict) {
+        
+        dp = new int[s.length()];
+        //-1 = unsolved, 0 = false, 1 = true (index value)
+        
+        Arrays.fill(dp, -1);   //filling dp array with -1    
+        Set<String> set = new HashSet<>();
+        for(String word : wordDict){
+            
+            set.add(word);
+        }
+        
+        return wordBreak(s, 0, set);
+        
+    }
+    
+    private boolean wordBreak(String s, int i, Set<String> set){
+        //base
+        if(i == s.length()){
+            return true;
+        }
+        
+        if(dp[i] == -1){
+            
+            int ans = 0;
+            
+            //recursion
+        for(int j=i; j<s.length(); j++){  //start from 4th index
+            
+            String curr = s.substring(i, j+1);   //start l in leetcode till leet
+            
+            if(set.contains(curr)){
+                //we will start string from j+1 with wordBreak
+                boolean validRemaining = wordBreak(s, j+1, set);  //break from 8th index
+                
+                if(validRemaining){
+                    
+                    ans = 1;  //solved and true
+                
+                }
+            }
+        }
+            
+            dp[i] = ans;   //if not unsolved then it is ans
+            
+        }
+        
+        
+        return dp[i] == 1 ? true : false;
+    }
+}
