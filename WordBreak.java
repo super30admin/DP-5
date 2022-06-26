@@ -1,45 +1,45 @@
-
 class Solution 
 {
     public boolean wordBreak(String s, List<String> wordDict) 
     {
-        
-        int length = s.length();
+        int inputLength = s.length();
         Set<String> set = new HashSet<>(wordDict);
-        boolean dp[][] = new boolean[length][length];
+        boolean dp[][] = new boolean[inputLength+1][inputLength+1];
         
-        for(int i = 1; i <= length; i++)
+        for(int partitionSize = 1; partitionSize <= inputLength; partitionSize++)
         {
-            for(int j = 0; j + i < length+1; j++)
+            for(int index = 0; index + partitionSize <= inputLength; index++)
             {
-                String input = s.substring(j, j + i);
+                String input = s.substring(index, index + partitionSize);
+                
+                int start = index;
+                int end = index + partitionSize -1;
                 
                 if(set.contains(input))
-                    dp[j][j+i-1] = true;
+                {
+                    dp[start][end] = true;
+                }
                 else
                 {
-                    int start = j;
-                    int end = j + i;
-                    
-                    for(int k =1; k < input.length(); k++)
+                    int length = input.length();
+                    for(int partition = 1; partition < length; partition++)
                     {
+                        boolean prefix = dp[start][start+partition-1];
+                        boolean suffix = dp[start+partition][end];
                         
-                        boolean firstHalf = dp[start][start+k-1];
-                        boolean secondHalf = dp[start+k][end-1];
-                        boolean result = firstHalf && secondHalf;
+                        boolean result = prefix && suffix;
+                        
                         if(result)
                         {
-                            dp[start][end-1] = result;
+                            dp[start][end] = true;
                             break;
                         }
-                            
                     }
                 }
             }
         }
         
-        
-        return dp[0][length-1];
+        return dp[0][inputLength-1];
         
     }
 }
