@@ -1,10 +1,16 @@
+/**
+Time Complexity : O(N)
+Space Complexity : O(N)
+Did this code successfully run on Leetcode : Yes
+Any problem you faced while coding this : No
+*/
 class Solution 
 {
     public boolean wordBreak(String s, List<String> wordDict) 
     {
         int inputLength = s.length();
         Set<String> set = new HashSet<>(wordDict);
-        boolean dp[][] = new boolean[inputLength+1][inputLength+1];
+        boolean dp[][] = new boolean[inputLength][inputLength];
         
         for(int partitionSize = 1; partitionSize <= inputLength; partitionSize++)
         {
