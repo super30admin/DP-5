@@ -1,0 +1,59 @@
+Word Break
+#Time: O(N^2 + T),
+#Building DP costs O(N^2).
+#and time to build the Trie,is O(T).
+#So total complexity is: O(N * N + T) = O(N^2 + T).
+#Space: O(N + T)
+class TrieNode:
+    def __init__(self):
+        self.isWord = False
+        self.child = defaultdict(TrieNode)
+    
+    def addWord(self, word):
+        cur = self
+        for c in word:
+            cur = cur.child[c]
+        cur.isWord = True
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        root = TrieNode()
+        for word in wordDict:
+            root.addWord(word)
+            
+        n = len(s)
+        dp = [False] * (n+1)
+        dp[n] = True
+        
+        for i in range(n-1, -1, -1):
+            cur = root
+            for j in range(i+1, n+1):
+                c = s[j-1]
+                if c not in cur.child: break  # s[i:j] not exist in our trie
+                cur = cur.child[c]
+                if cur.isWord and dp[j]:
+                    dp[i] = True
+                    break
+        
+        return dp[0]
+Unique Paths
+#tc: O(n*m)
+#sc: O(m)
+class Solution:
+    dp = dict()
+    def uniquePaths(self, m: int, n: int) -> int:
+        if m > n:
+            r = m
+            c = n
+        else:
+            r = n
+            c = m
+            
+        if r == 1 or c == 1:
+            return 1
+
+        if (r, c) not in self.dp:
+            self.dp[(r, c)] = self.uniquePaths(r - 1, c) + self.uniquePaths(r, c - 1)
+
+        return self.dp[(r,c)]
+        
