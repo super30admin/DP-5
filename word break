@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        set<string> set;
+        for(auto it : wordDict){
+            set.insert(it);
+        }
+        int n = s.size();
+        vector<bool> ans(n+1,false);
+        ans[0] = true;
+        for(int i = 1 ; i<n+1; i++){
+            for(int j = 0; j<i /*checks for substrings between j and i only*/ ; j++){
+                if(ans[j] == true){
+                    /* n^2 for i and j for */
+                    if(set.find(s.substr(j,i-j))!=set.end()){   /* n for substring function*/
+                        ans[i] = true;
+                        break; /*no need to check further as we got the substring*/
+                    }
+                }
+            }
+        }
+    return ans[n];
+    }
+};
+/*n^3 for whole*/
