@@ -1,5 +1,5 @@
-//TimeCompelexity
-//SpaceComplexity
+//TimeCompelexity.   O(m*n)
+//SpaceComplexity.   O(m*n)
 
 class Solution {
     public int uniquePaths(int m, int n) {
