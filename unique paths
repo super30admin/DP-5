@@ -1,0 +1,61 @@
+// Top Down DP - memorising the recursion (if already visited, not visiting it again)
+
+// Time Complexity : O(MN)
+// Space Complexity : O(MN)
+// Did this code successfully run in leetcode : Yes
+// Any problems faced : No
+
+class Solution {
+public:
+
+    vector<vector<int>> dp;
+
+    int uniquePaths(int m, int n) {
+        int i = 0, j = 0;
+        dp = vector<vector<int>>(m + 1, vector<int>(n + 1));
+        return dfs(m, n, i, j);
+    }
+
+    int dfs(int m, int n, int i, int j) {
+        
+        // base condition
+        if(i == m - 1 && j == n - 1) return 1;
+        if(i == m || j == n) return 0;
+
+        // case1
+        if(dp[i][j + 1] == 0) {  // if right cell is not visited
+            dp[i][j + 1] = dfs(m, n, i, j + 1);
+        }
+        int case1 = dp[i][j + 1]; // calc no. of ways of right cell
+
+        // case2
+        if(dp[i + 1][j] == 0) {  // if left cell is not visited
+            dp[i + 1][j] = dfs(m, n, i + 1, j);
+        }
+        int case2 = dp[i + 1][j]; // calc no. of ways of bottom cell
+
+        return case1 + case2; // calc both the ways of right and bottom cells
+    }
+};
+
+
+
+// Bottom Up DP
+
+// Time Complexity : O(mn)
+// Space Complexity : O(n)
+// Did this code successfully run in leetcode : Yes
+// Any problems faced : No
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<int> dp(n, 1);  // all rows are filled with 1
+        for(int i = m - 2; i >= 0; i--) {  // last row should be 1
+            for(int j = n - 2; j >= 0; j--) {  // last col should be 1
+                dp[j] += dp[j + 1];  // adding right element and already existing element
+            }
+        }
+        return dp[0];
+    }
+};
