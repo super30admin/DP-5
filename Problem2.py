@@ -1,0 +1,20 @@
+'''
+Problem: Unique Paths
+Time Complexity: O(m * n)
+Space Complexity: O(m * n)
+Did this code successfully run on Leetcode: Yes
+Any problem you faced while coding this: No
+Your code here along with comments explaining your approach:
+        Applied Bottom Up DP
+        Every cell is the sum of cell above and cell at the left
+'''
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [[1 for _ in range(n)] for _ in range(m)]
+
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i-1][j]+ dp[i][j-1]
+        
+        return dp[m-1][n-1]
