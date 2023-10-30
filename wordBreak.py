@@ -1,3 +1,6 @@
+# Time Complexity: O(N^N)
+# Space Complexity: O(N)
+
 class Solution(object):
     def wordBreak(self, s, wordDict):
         """
