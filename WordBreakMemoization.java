@@ -3,7 +3,7 @@ import java.util.*;
 public class WordBreakMemoization {
 
         // Memoization - Dynamic Programming - Time O(N*M*L) + O(M*L) and
-        // Space O(M*L) + O(N*N)
+        // Space O(M*L) + O(N) recursive stack space
 
         HashSet<String> set;
 
