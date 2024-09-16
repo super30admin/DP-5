@@ -1,0 +1,36 @@
+/**********
+Time O(mn)
+Space O(mn)
+Leetcode yes
+Problem no
+
+At any given cell we can either come from top or its left cell as robot can only move down right and bottom.
+for the first row cells there is only one way to reach i.e from left cell, hence we initialise it with 1
+similary for first column cells we can only reach those from top cell, hence we also initialise those as 1
+for all other cells we add values in its left cell and top cell
+the last entry of matrix gives us the answer
+*********/
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        
+        int[][] dp = new int[m][n];
+        
+        for(int i = 0; i<m;i++)
+            dp[i][0] = 1;
+        for(int j = 0; j<n;j++)
+            dp[0][j] = 1;
+        
+        for(int i=1; i< m;i++)
+        {
+            for(int j=1; j<n;j++)
+            {
+                dp[i][j] = dp[i-1][j]+ dp[i][j-1];
+            }
+        }
+        
+        return dp[m-1][n-1];
+        
+        
+    }
+}
