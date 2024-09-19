@@ -1,0 +1,30 @@
+TIME; O(n)
+SPACE; O(n)
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) 
+    {
+        HashSet<String> set = new HashSet<>(wordDict);
+        HashMap<String,  Boolean> memo = new HashMap<>();
+        return helper(s,set, memo);
+    }
+    private boolean helper(String s, HashSet<String> set, HashMap<String,  Boolean> memo)
+    {
+        if(s.length() == 0) return true;
+        if(memo.containsKey(s)) 
+        {
+            return memo.get(s);
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            String subst = s.substring(0, i+1);
+            if(set.contains(subst) && helper(s.substring(i + 1), set, memo))
+            {
+                memo.put(s, true);
+                return true;
+            }
+        }
+        memo.put(s, false);
+        return false;
+    }
+}
