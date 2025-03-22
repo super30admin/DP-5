@@ -1,0 +1,178 @@
+// Time Complexity :O(2^m+n) here for each element we have two possibilities to go so we can get m+n element for each path 
+// Space Complexity :O(m*n) for grid space and recursion stack space is  O(m-1+n-1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        // declaring grid with m*n size and intilized with zeros
+        int[][] grid = new int[m][n]; 
+        grid[m - 1][n - 1] = 1; // as per given problem there is one escape path at m-1 and n-1
+        return helper(0, 0, m, n, grid); // start recusrion at grid[0][0]
+    }
+
+    // int type recusrion
+    public int helper(int i, int j, int m, int n, int[][] grid) {
+        if (i == m - 1 && j == n - 1) { // true case when i and j become m-1 and n-1 then the path is ended
+            return 1;
+        }
+        // action
+        int right = 0;
+        int bottom = 0;
+        if (i < m && j < n) { // checking boundaries
+            count++; // To understand flow of recusrion
+            System.out.println("i " + i + " j " + j + " count " + count);
+            right = helper(i + 1, j, m, n, grid);
+            // System.out.println("right " + right+ " count "+count+" i " + i + " j " + j);
+            bottom = helper(i, j + 1, m, n, grid);
+            // System.out.println("bottom " + bottom+ ""+ " count "+count+" i " + i + " j "
+            // + j);
+        }
+        return right + bottom;// for each element the number of path are combination of right and bottom
+                              // possible paths
+
+    }
+}
+
+
+// Time Complexity :O(2^m+n) here for each element we have two possibilities to go so we can get m+n element for each path 
+// Space Complexity :O(m*n) for grid space and recursion stack space is O(m-1+n-1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    
+
+    public int uniquePaths(int m, int n) {
+        // declaring grid with m*n size and intilized with zeros
+        int[][] grid = new int[m][n];
+        // declaring memozitaion with m*n and intilized with zeros
+        int[][] memoization = new int[m][n];
+        // filling last column with 1's becose for last column we dont have right
+        for (int i = 0; i < m; i++) {
+            memoization[i][n - 1] = 1;
+        }
+        // filling last row with 1's becose for last column we dont have bottom
+        for (int j = 0; j < n; j++) {
+            memoization[m - 1][j] = 1;
+        }
+        // grid[m - 1][n - 1] = 1; // as per given problem there is one escape path at
+        // m-1 and n-1
+        return helper(0, 0, m, n, grid, memoization); // start recusrion at grid[0][0]
+    }
+
+    // int type recusrion
+    public int helper(int i, int j, int m, int n, int[][] grid, int[][] memoization) {
+        if (i == m - 1 && j == n - 1) { // true case when i and j become m-1 and n-1 then the path is ended
+            return 1;
+        }
+        if (memoization[i][j] != 0) { // if the i and j exist in memoization to avoid recusrion reapted subproblem
+            return memoization[i][j];
+        }
+        // action
+        int right = 0;
+        int bottom = 0;
+        if (i < m && j < n) { // checking boundaries
+            right = helper(i + 1, j, m, n, grid, memoization);
+            memoization[i + 1][j] = right; // stroing subproblem value
+            bottom = helper(i, j + 1, m, n, grid, memoization);
+             memoization[i][j + 1] = bottom;// stroing subproblem value
+        }
+        return right + bottom;// for each element the number of path are combination of right and bottom
+                              // possible paths
+
+    }
+}
+
+
+//DP approach
+//same as above approach but here insteading of storing childs to memoization here storing parrent by adding two childs are right and bottom
+
+// Time Complexity :O(2^m+n) here for each element we have two possibilities to go so we can get m+n element for each path 
+// Space Complexity :O(m*n) for grid space and recursion stack space is O(m+n-2)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    int count = 0;
+
+    public int uniquePaths(int m, int n) {
+        // declaring grid with m*n size and intilized with zeros
+        int[][] grid = new int[m][n];
+        // declaring memozitaion with m*n and intilized with zeros
+        int[][] memoization = new int[m][n];
+        // filling last column with 1's becose for last column we dont have right
+        for (int i = 0; i < m; i++) {
+            memoization[i][n - 1] = 1;
+        }
+        // filling last row with 1's becose for last column we dont have bottom
+        for (int j = 0; j < n; j++) {
+            memoization[m - 1][j] = 1;
+        }
+        // grid[m - 1][n - 1] = 1; // as per given problem there is one escape path at
+        // m-1 and n-1
+        return helper(0, 0, m, n, grid, memoization); // start recusrion at grid[0][0]
+    }
+
+    // int type recusrion
+    public int helper(int i, int j, int m, int n, int[][] grid, int[][] memoization) {
+        if (i == m - 1 && j == n - 1) { // true case when i and j become m-1 and n-1 then the path is ended
+            return 1;
+        }
+        if (memoization[i][j] != 0) { // if the i and j exist in memoization to avoid recusrion reapted subproblem
+            return memoization[i][j];
+        }
+        // action
+        int right = 0;
+        int bottom = 0;
+        if (i < m && j < n) { // checking boundaries
+            count++; // To understand flow of recusrion
+            // System.out.println("i " + i + " j " + j + " count " + count);
+            right = helper(i + 1, j, m, n, grid, memoization);
+            // System.out.println("right " + right+ " count "+count+" i " + i + " j " + j);
+            bottom = helper(i, j + 1, m, n, grid, memoization);
+            // System.out.println("bottom " + bottom+ ""+ " count "+count+" i " + i + " j "
+            // + j);
+             }
+             memoization[i][j] = right+bottom;
+        return right + bottom;// for each element the number of path are combination of right and bottom
+                              // possible paths
+
+    }
+}
+
+
+// Time Complexity :O(m*n) 
+// Space Complexity :O(m*n) for dp Array
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+   //declaring dp and initilyzing dp with zeros
+     int[][] dp=new int[m][n];
+     //filling last column with 1's as we dont have right column for that
+     for(int i=m-1;i>=0;i--){
+        dp[i][n-1]=1;
+     }
+     //filling last row with 1's as we dont have bottom row for that
+     for(int j=n-1;j>=0;j--){
+         dp[m-1][j]=1;
+     }
+     //itterating over the dp array and filling from m-2 and n-2 to 0 as we filled m-1 and n-1 above
+    for(int i=m-2;i>=0;i--){
+         for(int j=n-2;j>=0;j--){
+         dp[i][j]= dp[i+1][j]+dp[i][j+1]; //adding right and bottom cell count for each elememnt
+     }
+    }
+     return dp[0][0]; //final largest possible path sum
+    }
+}

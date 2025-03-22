@@ -1,0 +1,65 @@
+// Time Complexity :O(nl) O(l^l)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        HashSet<String> st = new HashSet<>(wordDict);//make a copy into hashset for O(1)lookup
+        return helper(s, st); //recusrion 
+    }
+
+    public boolean helper(String s, HashSet<String> st) {
+        if(s.length() == 0 ){ //when even the length of sb becomes 0 then it ends
+            return true;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            String sb = s.substring(0,i+1);
+            if(st.contains(sb) && helper(s.substring(i+1),st)){//checking set contains first sb then only do recursion for rest of the string
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+}
+// Time Complexity :O(nl) O(l^2)
+// Space Complexity :O(n)+O(m) //m is the length of the string
+// Did this code successfully run on Leetcode :yess
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:
+
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        HashSet<String> st = new HashSet<>(wordDict); //making a copy of dic into hashset for O(1) lookup
+        HashSet<String> memo = new HashSet<>(); // set for storing not possible split substring to avoid repated subproblem calculation
+        return helper(s, st, memo);
+    }
+    public boolean helper(String s, HashSet<String> st, HashSet<String> memo) {
+        if (s.length() == 0) {
+            return true;
+        }
+        if (memo.contains(s)) { //if this set contains string then it menas the substring does not exist in dic
+            return false;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            String sb = s.substring(0, i + 1); //first substring 
+            String rest = s.substring(i + 1); //rest of the substring
+            if (st.contains(sb)) { //if first sb conatins dic then proceed
+                boolean interResult = helper(rest, st, memo);
+                if (interResult) { //result of substring
+                    return true;
+                } else {
+                    memo.add(rest); //it does not exist in dic then adding it to memo set for futher subproblems
+                }
+            }
+        }
+        return false;
+    }
+
+}
