@@ -1,0 +1,63 @@
+##Problem1
+class Solution {
+
+    public boolean wordBreak(String s, List<String> wordDict) {
+
+        HashSet <String> set = new HashSet<>(wordDict);
+
+       return helper(s, set);
+
+    }
+
+    private boolean helper(String s, HashSet <String> set){
+
+        // base case
+
+        int len = s.length();
+
+        if(len == 0) return true;
+
+        for(int i = 0; i <= len; i++){
+
+            if(set.contains(s.substring(0,i)) && helper(s.substring(i), set)) return true;
+
+        }
+
+        return false;
+
+    }
+
+}
+
+
+##Problem2
+class Solution {
+
+
+    public int uniquePaths(int m, int n) {
+   int[][] dp=new int[m][n];
+  for(int i=0;i<m;i++){
+
+          for(int j=0;j<n;j++){
+
+
+              if(i>0&&j>0){
+
+
+                  dp[i][j]=dp[i-1][j]+dp[i][j-1];
+
+      }
+
+
+              else{
+         dp[i][j]=1;
+
+              }
+          }
+  }
+
+        return dp[m-1][n-1];
+
+    }
+}
+
