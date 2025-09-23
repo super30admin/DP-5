@@ -1,0 +1,40 @@
+class UniquePaths {
+    //Idea is to use dp memoization to store the sub problem results
+    //At each cell, the total no'of ways = no'of ways from top + no'of ways from left
+    //Time Complexity: O(m*n)
+    //Space Complexity: O(m*n)
+    int count=0;
+    public int uniquePaths(int m, int n) {
+        int [][] dp = new int[m][n];
+       
+        for(int j=0;j<n;j++)
+        {
+            dp[0][j]=1;
+        }
+        for(int i=0;i<m;i++)
+        {
+            dp[i][0]=1;
+        }
+       
+      for(int i=1;i<m;i++)
+      {
+          for(int j=1;j<n;j++)
+          {
+              traverse(i,j,dp);
+          }
+      }
+       
+        return dp[m-1][n-1];
+    }
+    private int traverse(int m,int n,int[][]dp){
+        if(dp[m][n]!=0)
+        {
+            return dp[m][n];
+        }
+         else
+         {
+           dp[m][n] = traverse(m,n-1,dp)+traverse(m-1,n,dp);
+        return dp[m][n];
+         }
+    }
+}
